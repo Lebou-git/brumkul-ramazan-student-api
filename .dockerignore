@@ -1,0 +1,15 @@
+.git
+.gitignore
+.gradle
+build
+logs
+backups
+.env
+.env.*
+*.md
+Jenkinsfile
+docker-compose.yml
+.idea
+*.iml
+.vscode
+.DS_Store
