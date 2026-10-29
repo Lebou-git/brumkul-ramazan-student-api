@@ -41,6 +41,21 @@ public class StudentService {
     }
 
     @Transactional
+    public StudentResponse update(Long id, StudentRequest request) {
+        Student student = getStudent(id);
+        String email = normalizeEmail(request.email());
+        if (repository.existsByEmailAndIdNot(email, id)) {
+            throw new DuplicateEmailException(email);
+        }
+        student.update(
+                request.firstName().trim(),
+                request.lastName().trim(),
+                email,
+                request.groupName().trim());
+        return StudentResponse.from(student);
+    }
+
+    @Transactional
     public void delete(Long id) {
         repository.delete(getStudent(id));
     }

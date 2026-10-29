@@ -52,6 +52,14 @@ public class Student {
         this.updatedAt = now;
     }
 
+    public void update(String firstName, String lastName, String email, String groupName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.groupName = groupName;
+        this.updatedAt = Instant.now();
+    }
+
     public Long getId() {
         return id;
     }

@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -86,6 +87,28 @@ class StudentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.lastName").value("Brumkul"));
+    }
+
+    @Test
+    void updateStudentChangesData() throws Exception {
+        long id = createStudent("Ramazan", "Brumkul", "ramazan.brumkul@example.com", "IT2-2301");
+
+        mockMvc.perform(put("/api/students/{id}", id)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json("Ramazan", "Brumkul", "ramazan.brumkul@example.com", "IT2-2301-DevOps")))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.groupName").value("IT2-2301-DevOps"))
+                .andExpect(jsonPath("$.updatedAt").exists());
+    }
+
+    @Test
+    void updateMissingStudentReturnsNotFound() throws Exception {
+        mockMvc.perform(put("/api/students/{id}", 999999)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json("Ramazan", "Brumkul", "ramazan.brumkul@example.com", "IT2-2301")))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.title").value("Student not found"));
     }
 
     @Test
