@@ -65,3 +65,5 @@ Errors are returned in the RFC 9457 Problem Details format (`application/problem
 | 400 Bad Request | Invalid request body, for example an empty name or a wrong email |
 | 404 Not Found | A student with this ID does not exist |
 | 409 Conflict | The email already belongs to another student |
+
+CI trigger check by Ramazan Brumkul
