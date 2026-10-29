@@ -1,7 +1,6 @@
 # brumkul-ramazan-student-api
 
-Description: Spring Boot CRUD API for student records stored in PostgreSQL.
-
+Description: Spring Boot CRUD REST API for managing student records stored in PostgreSQL, documented by Ramazan Brumkul.
 | Field | Value |
 | --- | --- |
 | Author | Ramazan Brumkul |
@@ -56,3 +55,13 @@ Application URL: http://localhost:8081/brumkul-ramazan
 ### feature/brumkul-ramazan-crud
 
 Implemented the update operation `PUT /api/students/{id}`. It replaces the first name, last name, email and group of an existing student. The request body is validated (400 Bad Request), a nonexistent ID returns 404 Not Found, and an email that already belongs to another student returns 409 Conflict. MockMvc tests cover a successful update and a nonexistent student.
+
+## Error responses
+
+Errors are returned in the RFC 9457 Problem Details format (`application/problem+json`).
+
+| Status | When |
+| --- | --- |
+| 400 Bad Request | Invalid request body, for example an empty name or a wrong email |
+| 404 Not Found | A student with this ID does not exist |
+| 409 Conflict | The email already belongs to another student |
