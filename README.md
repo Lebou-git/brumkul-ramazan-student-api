@@ -1,6 +1,6 @@
 # brumkul-ramazan-student-api
 
-Description: Spring Boot CRUD API for student records.
+Description: Spring Boot CRUD API for student records stored in PostgreSQL.
 
 | Field | Value |
 | --- | --- |
